@@ -1,0 +1,32 @@
+﻿<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <title></title>
+</head>
+<body ng-app="mymodule">
+
+  <div ng-controller="TestCtrl">
+    <button id="loadDataBtn" ng-click="load()">load data</button>
+    
+  </div>
+
+  <script type="text/javascript" src="scripts/angular.js">
+  </script>
+  <script type="text/javascript">
+    angular.module('mymodule',[]);
+
+    angular.module('mymodule').controller('TestCtrl',function($scope,$http){
+
+      $scope.load = function(){
+        $http.get('/api/values').success(function (data) {         
+          $scope.data = data;
+          node = document.createElement('pre');
+          node.setAttribute('id', 'dataArea');
+          node.innerHTML = data;
+          document.getElementById('loadDataBtn').parentElement.appendChild(node);
+        })
+      }
+    })
+  </script>
+</body>
+</html>
